@@ -15,7 +15,8 @@ class ProfileView: UITableView, UITableViewDataSource, UITableViewDelegate {
         self.dataSource = self
         self.delegate = self
         self.register(TopProfileInfoCell.self, forCellReuseIdentifier: TopProfileInfoCell.identifier)
-        self.register(MiddleTabelViewCell.self , forCellReuseIdentifier: MiddleTabelViewCell.identifier)
+        self.register(MiddleTableViewCell.self , forCellReuseIdentifier: MiddleTableViewCell.identifier)
+        self.register(LastTableViewCell.self, forCellReuseIdentifier: LastTableViewCell.identifier)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,6 +36,10 @@ class ProfileView: UITableView, UITableViewDataSource, UITableViewDelegate {
                 switch ProfileEnum(rawValue: indexPath.section) {
                 case .topInfoCell:
                     return 300
+                case .middleInfoCell:
+                    return 200
+                case .lastInfoCell:
+                    return 260
                 default:
                     return 250
                 }
@@ -50,7 +55,10 @@ class ProfileView: UITableView, UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: TopProfileInfoCell.identifier, for: indexPath) as! TopProfileInfoCell
             return cell
         case .middleInfoCell:
-            let cell = tableView.dequeueReusableCell(withIdentifier: MiddleTabelViewCell.identifier, for: indexPath) as! MiddleTabelViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: MiddleTableViewCell.identifier, for: indexPath) as! MiddleTableViewCell
+            return cell
+        case .lastInfoCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: LastTableViewCell.identifier, for: indexPath) as! LastTableViewCell
             return cell
     
         }

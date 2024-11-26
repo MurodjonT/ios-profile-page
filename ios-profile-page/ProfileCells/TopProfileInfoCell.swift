@@ -97,8 +97,9 @@ class TopProfileInfoCell: UITableViewCell {
         
         containerView.snp.makeConstraints { make in
             make.center.equalTo(contentView)
-            make.width.equalTo(contentView.snp.width).multipliedBy(0.9)
-            make.height.equalTo(contentView.snp.height).multipliedBy(0.5)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
+            make.height.equalTo(contentView.snp.height).multipliedBy(0.6)
             make.bottom.equalTo(-10)
            }
 
@@ -120,8 +121,9 @@ class TopProfileInfoCell: UITableViewCell {
         }
         
         buttonInfo.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(12)
-            make.leading.equalTo(containerView.snp.leading).offset(280)
+            make.top.equalTo(nameLabel.snp.bottom).offset(12.5)
+            make.leading.equalTo(containerView.snp.leading).offset(295)
+            
             
         }
     }

@@ -11,4 +11,5 @@ import Foundation
 enum ProfileEnum: Int, CaseIterable {
     case topInfoCell
     case middleInfoCell
+    case lastInfoCell
 }
