@@ -6,15 +6,22 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D02FF9BDD3112C084F4C814C /* Pods_ios_profile_page.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A346CA05EAED6420BC6CB59 /* Pods_ios_profile_page.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1A346CA05EAED6420BC6CB59 /* Pods_ios_profile_page.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_profile_page.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94844A82063F78A08481B0CD /* Pods-ios-profile-page.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-profile-page.release.xcconfig"; path = "Target Support Files/Pods-ios-profile-page/Pods-ios-profile-page.release.xcconfig"; sourceTree = "<group>"; };
 		9FD23B122CF57A2C00F7C65E /* ios-profile-page.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-profile-page.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA34AE629ED5EE59F3FC9F0D /* Pods-ios-profile-page.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-profile-page.debug.xcconfig"; path = "Target Support Files/Pods-ios-profile-page/Pods-ios-profile-page.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		9FD23B242CF57A2E00F7C65E /* Exceptions for "ios-profile-page" folder in "ios-profile-page" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Supports/Info.plist,
 			);
 			target = 9FD23B112CF57A2C00F7C65E /* ios-profile-page */;
 		};
@@ -36,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02FF9BDD3112C084F4C814C /* Pods_ios_profile_page.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40A5B48D81AEB083A000572D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA34AE629ED5EE59F3FC9F0D /* Pods-ios-profile-page.debug.xcconfig */,
+				94844A82063F78A08481B0CD /* Pods-ios-profile-page.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8808F964488CA590479CF6CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A346CA05EAED6420BC6CB59 /* Pods_ios_profile_page.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9FD23B092CF57A2C00F7C65E = {
 			isa = PBXGroup;
 			children = (
 				9FD23B142CF57A2C00F7C65E /* ios-profile-page */,
 				9FD23B132CF57A2C00F7C65E /* Products */,
+				40A5B48D81AEB083A000572D /* Pods */,
+				8808F964488CA590479CF6CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,9 +92,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9FD23B252CF57A2E00F7C65E /* Build configuration list for PBXNativeTarget "ios-profile-page" */;
 			buildPhases = (
+				C3C16315BA9E178A54DA9CBB /* [CP] Check Pods Manifest.lock */,
 				9FD23B0E2CF57A2C00F7C65E /* Sources */,
 				9FD23B0F2CF57A2C00F7C65E /* Frameworks */,
 				9FD23B102CF57A2C00F7C65E /* Resources */,
+				6F8791EB104259FC783D4D9A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -77,8 +106,6 @@
 				9FD23B142CF57A2C00F7C65E /* ios-profile-page */,
 			);
 			name = "ios-profile-page";
-			packageProductDependencies = (
-			);
 			productName = "ios-profile-page";
 			productReference = 9FD23B122CF57A2C00F7C65E /* ios-profile-page.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +154,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6F8791EB104259FC783D4D9A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-profile-page/Pods-ios-profile-page-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-profile-page/Pods-ios-profile-page-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-profile-page/Pods-ios-profile-page-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3C16315BA9E178A54DA9CBB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios-profile-page-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9FD23B0E2CF57A2C00F7C65E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,16 +209,18 @@
 /* Begin XCBuildConfiguration section */
 		9FD23B262CF57A2E00F7C65E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA34AE629ED5EE59F3FC9F0D /* Pods-ios-profile-page.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-profile-page/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -167,16 +238,18 @@
 		};
 		9FD23B272CF57A2E00F7C65E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94844A82063F78A08481B0CD /* Pods-ios-profile-page.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-profile-page/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
