@@ -76,6 +76,15 @@ class InnerTableViewCell: UITableViewCell {
         imageView.tintColor = .orange
         return imageView
     }()
+    
+    private let buttonInfo: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
+        button.tintColor = .gray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.clipsToBounds = true
+        return button
+    }()
 
     private let label: UILabel = {
         let label = UILabel()
@@ -88,6 +97,7 @@ class InnerTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(iconImageView)
         contentView.addSubview(label)
+        contentView.addSubview(buttonInfo)
 
         iconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
@@ -99,6 +109,11 @@ class InnerTableViewCell: UITableViewCell {
             make.leading.equalTo(iconImageView.snp.trailing).offset(12)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        buttonInfo.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalToSuperview()
         }
     }
 

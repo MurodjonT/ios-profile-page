@@ -1,9 +1,3 @@
-//
-//  LastTableViewCell.swift
-//  ios-profile-page
-//
-//  Created by Murodjon Turobov on 26/11/24.
-//
 import UIKit
 import SnapKit
 
@@ -67,6 +61,11 @@ extension LastTableViewCell: UITableViewDelegate, UITableViewDataSource {
           let titles = ["Xavfsizlik", "Ilova tili", "Xabarnoma", "Ko'rinish"]
           let icons = ["lock.shield", "globe", "bell", "sun.min" ]
           cell.configure(with: titles[indexPath.row], iconName: icons[indexPath.row])
+          if indexPath.row == 1 {
+              cell.addLangLabel()
+          } else if indexPath.row == 3 {
+              cell.addThemeLabel()
+          }
           return cell
       }
     
@@ -81,6 +80,15 @@ extension LastTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
 class InnerTableViewCell2: UITableViewCell {
     static let identifier = "InnerTableViewCell2"
+
+    private let buttonInfo: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
+        button.tintColor = .gray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.clipsToBounds = true
+        return button
+    }()
     
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -95,11 +103,34 @@ class InnerTableViewCell2: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
+    
+    private let LangLabel: UILabel = {
+        let label = UILabel()
+        label.text = "O'zbek"
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.isHidden = true
+        return label
+    }()
+    
+    private let ThemeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Kunduzgi"
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.isHidden = true
+        return label
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(iconImageView)
         contentView.addSubview(label)
+        contentView.addSubview(buttonInfo)
+        contentView.addSubview(LangLabel)
+        contentView.addSubview(ThemeLabel)
 
         iconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
@@ -112,6 +143,21 @@ class InnerTableViewCell2: UITableViewCell {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-16)
         }
+        
+        buttonInfo.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalToSuperview()
+        }
+        
+        LangLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(buttonInfo.snp.leading).offset(-8)
+            make.centerY.equalToSuperview()
+        }
+        
+        ThemeLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(buttonInfo.snp.leading).offset(-8)
+            make.centerY.equalToSuperview()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -122,6 +168,12 @@ class InnerTableViewCell2: UITableViewCell {
         iconImageView.image = UIImage(systemName: iconName)
         label.text = text
     }
+    
+    func addLangLabel() {
+        LangLabel.isHidden = false
+    }
+    
+    func addThemeLabel() {
+        ThemeLabel.isHidden = false
+    }
 }
-
-
