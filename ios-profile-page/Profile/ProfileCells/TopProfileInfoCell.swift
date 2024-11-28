@@ -63,6 +63,7 @@ class TopProfileInfoCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .systemOrange
         label.textAlignment = .center
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -77,6 +78,9 @@ class TopProfileInfoCell: UITableViewCell {
         containerView.addSubview(detailsLabel)
         containerView.addSubview(buttonInfo)
         setupConstraints()
+        
+        let detailsTapGesture = UITapGestureRecognizer(target: self, action: #selector(detailsLabelTapped))
+        detailsLabel.addGestureRecognizer(detailsTapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -127,4 +131,42 @@ class TopProfileInfoCell: UITableViewCell {
             
         }
     }
+    
+    @objc private func detailsLabelTapped() {
+        print("Details label clicked")
+        UIView.animate(withDuration: 0.2,
+                              animations: {
+                                  self.detailsLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                              }, completion: { _ in
+                                  UIView.animate(withDuration: 0.2) {
+                                      self.detailsLabel.transform = CGAffineTransform.identity
+                                  }
+                              })
+        
+        DispatchQueue.main.async { [weak self] in
+              guard let self = self, let parentViewController = self.parentViewController else { return }
+              let passportViewController = PassportView()
+              passportViewController.modalPresentationStyle = .fullScreen
+              let transition = CATransition()
+              transition.duration = 0.3
+              transition.type = .push
+              transition.subtype = .fromRight
+              parentViewController.view.window?.layer.add(transition, forKey: kCATransition)
+              parentViewController.present(passportViewController, animated: false, completion: nil)
+          }
+      }
+  }
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while let responder = parentResponder {
+            parentResponder = responder.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
 }
+
