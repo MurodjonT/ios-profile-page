@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BMControl: UIControl, BMViewProtocol {
+class ControlButton: UIControl, ViewProtocol {
     public init() {
         super.init(frame: .zero)
         

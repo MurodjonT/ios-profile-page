@@ -13,7 +13,7 @@
 
 import UIKit
 
-public protocol BMViewProtocol {
+public protocol ViewProtocol {
     func setup()
     func setupSubviews()
     func setupConstraints()
@@ -22,7 +22,7 @@ public protocol BMViewProtocol {
     func localize()
 }
 
-extension BMViewProtocol where Self: UIView {
+extension ViewProtocol where Self: UIView {
     public func setup() {
         setupSubviews()
         setupConstraints()
@@ -32,7 +32,7 @@ extension BMViewProtocol where Self: UIView {
     }
 }
 
-class BMView: UIView, BMViewProtocol {
+class BMView: UIView, ViewProtocol {
     public init() {
         super.init(frame: .zero)
         
@@ -43,11 +43,9 @@ class BMView: UIView, BMViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     public func setupSubviews() {}
     
-    public func setupConstraints() {
-    }
+    public func setupConstraints() {}
     
     public func setupTargets() {}
     
