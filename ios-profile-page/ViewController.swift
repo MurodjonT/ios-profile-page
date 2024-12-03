@@ -41,7 +41,8 @@ class ViewController: UIViewController {
             make.width.equalTo(240)
         }
         
-       
+        // customButton1 uchun bosish amalini qo'shish
+        customButton1.addTarget(self, action: #selector(navigateToNextView), for: .touchUpInside)
         
         let customButton2 = LeftIconTitleAndRightIconButton()
         customButton2.setData(leftIcon: "left_icon", text: "Ishonch denov 250 ", rightIcon: "right_icon")
@@ -52,5 +53,11 @@ class ViewController: UIViewController {
             make.height.equalTo(50)
             make.width.equalTo(240)
         }
+    }
+    
+    @objc func navigateToNextView() {
+        let nextViewController = NextViewController() // Boshqa view controller, o'zingiz yaratgan bo'lishingiz kerak
+        nextViewController.modalPresentationStyle = .fullScreen
+        present(nextViewController, animated: true, completion: nil)
     }
 }

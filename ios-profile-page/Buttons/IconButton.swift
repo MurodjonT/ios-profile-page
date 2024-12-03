@@ -21,7 +21,7 @@ class IconButton: UIButton {
          addSubview(containerView)
          containerView.addSubview(iconImageView)
          containerView.addSubview(customTitleLabel)
-        containerView.addSubview(forwardButton)
+         containerView.addSubview(forwardButton)
          
          containerView.layer.cornerRadius = 10
          containerView.clipsToBounds = true
