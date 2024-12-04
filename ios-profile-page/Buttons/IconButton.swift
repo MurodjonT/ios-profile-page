@@ -1,92 +1,62 @@
 import UIKit
-import SnapKit
 
-class IconButton: UIButton {
-    private let containerView = ViewAnimation()
-    private let iconImageView = UIImageView()
-    private let customTitleLabel = UILabel()
-    private let forwardButton = UIImageView()
-
-    init(iconSize: CGSize, isCentre: Bool) {
-        super.init(frame: .zero)
-        setupView(iconSize: iconSize, isCentre: isCentre)
-        self.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+class IconButton: ControlButton {
+    
+    var iconSize = CGSize(width: 0, height: 0)
+    let iconImageView = UIImageView()
+    var isCentre = false
+    var isTop = false
+    var isLeft = false
+    
+    init(iconSize: CGSize = CGSize(width: 12, height: 12), isCentre: Bool = false, isTop: Bool = false, isLeft: Bool = false) {
+        super.init()
+        
+        self.iconSize = iconSize
+        self.isCentre = isCentre
+        self.isTop = isTop
+        self.isLeft = isLeft
+        
+        constraints()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(iconSize: CGSize, isCentre: Bool) {
-         addSubview(containerView)
-         containerView.addSubview(iconImageView)
-         containerView.addSubview(customTitleLabel)
-         containerView.addSubview(forwardButton)
-         
-         containerView.layer.cornerRadius = 10
-         containerView.clipsToBounds = true
-         containerView.backgroundColor = .systemGray5
-         
-         // Qo'shimcha: containerView ga border qo'shamiz
-         containerView.layer.borderWidth = 0.5 // Chegaraning qalinligi
-         containerView.layer.borderColor = UIColor.systemGray3.cgColor // Chegaraning rangi (ajralib tursin uchun qora rang)
-
-         // containerView constraints
-         containerView.snp.makeConstraints { make in
-             make.top.bottom.equalToSuperview().inset(10) // top va bottomda biroz joy qoldirish uchun offset qo'shildi
-             make.leading.equalToSuperview().offset(5) // chap tomonda 5 piksel joy qoldirish
-             make.trailing.equalToSuperview().offset(-5) // o'ng tomonda 5 piksel joy qoldirish
-         }
-
-         // iconImageView settings
-         iconImageView.contentMode = .scaleAspectFit
+    override func setupSubviews() {
+        super.setupSubviews()
         
-         
-         // iconImageView constraints
-         iconImageView.snp.makeConstraints { make in
-             make.size.equalTo(iconSize)
-             make.leading.equalToSuperview().offset(5)
-             make.centerY.equalToSuperview()
-         }
-         
-         // customTitleLabel settings
-         customTitleLabel.textAlignment = .left
-         customTitleLabel.font = UIFont.systemFont(ofSize: 14)
-         
-         // customTitleLabel constraints
-         customTitleLabel.snp.makeConstraints { make in
-             make.leading.equalTo(iconImageView.snp.trailing).offset(10)
-             make.trailing.equalToSuperview().offset(-15)
-             make.centerY.equalToSuperview()
-         
-         }
+        addSubview(iconImageView)
+    }
+    
+    private func constraints() {
         
-        forwardButton.image = UIImage(systemName: "chevron.compact.forward")
-        forwardButton.tintColor = .systemGray
+        iconImageView.snp.makeConstraints { make in
+            if isCentre {
+                make.centerX.equalToSuperview()
+                
+            } else if isLeft {
+                make.left.equalToSuperview()
+
+            } else {
+                make.right.equalToSuperview()
+            }
+
+            if isTop {
+                make.top.equalToSuperview()
+                
+            } else {
+                make.centerY.equalToSuperview()
+            }
             
-            // forwardButton constraints
-        forwardButton.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 15, height: 15))
-            make.leading.equalTo(customTitleLabel.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
+            make.size.equalTo(iconSize)
         }
-}
-    
-
-//    
-    @objc private func buttonClicked() {
-        print("Icon button clicked")
     }
     
-    var icon: UIImage? {
-        get { iconImageView.image }
-        set { iconImageView.image = newValue }
-    }
-    
-    var titleText: String? {
-        get { customTitleLabel.text }
-        set { customTitleLabel.text = newValue }
+    func resetConstraintsToCentre() {
+        iconImageView.snp.remakeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.size.equalTo(iconSize.width)
+        }
     }
 }
-

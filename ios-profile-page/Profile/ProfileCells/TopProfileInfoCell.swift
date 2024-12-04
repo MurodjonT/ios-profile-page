@@ -39,48 +39,38 @@ class TopProfileInfoCell: UITableViewCell {
         return label
     }()
     
-    private let buttonInfo: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
-        button.tintColor = .systemOrange
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.clipsToBounds = true
+    private let closeButton: IconButton = {
+        let button = IconButton(iconSize: CGSize(width: 20, height: 20), isTop: true, isLeft: true)
+           button.iconImageView.image = UIImage(systemName: "xmark")
+           button.iconImageView.tintColor = .gray
+           return button
+       }()
+
+    private let detailsButton: TitleAndRightIconButton = {
+        let button = TitleAndRightIconButton()
+        button.setTitle(
+            title: "Passport ma'lumotlari",
+            titleFont: .systemFont(ofSize: 16),
+            titleColor: .systemOrange,
+            iconName: "chevron.forward",
+            iconColor: .systemOrange
+        )
         return button
-    }()
-    
-    private let cancelButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .gray
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.clipsToBounds = true
-        return button
-    }()
-    
-    private let detailsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Passport ma'lumotlari"
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = .systemOrange
-        label.textAlignment = .center
-        label.isUserInteractionEnabled = true
-        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .systemGray6
-        contentView.addSubview(cancelButton)
+        contentView.addSubview(closeButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(containerView)
         containerView.addSubview(avatarImageView)
         containerView.addSubview(nameLabel)
-        containerView.addSubview(detailsLabel)
-        containerView.addSubview(buttonInfo)
+        containerView.addSubview(detailsButton)
         setupConstraints()
         
-        let detailsTapGesture = UITapGestureRecognizer(target: self, action: #selector(detailsLabelTapped))
-        detailsLabel.addGestureRecognizer(detailsTapGesture)
+        detailsButton.addTarget(self, action: #selector(navigateToPassportView), for: .touchUpInside)
+
     }
     
     required init?(coder: NSCoder) {
@@ -89,7 +79,7 @@ class TopProfileInfoCell: UITableViewCell {
     
     private func setupConstraints() {
         
-        cancelButton.snp.makeConstraints { make in
+        closeButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaInsets.top).offset(16)
             make.leading.equalTo(16)
         }
@@ -119,54 +109,29 @@ class TopProfileInfoCell: UITableViewCell {
             make.leading.trailing.equalTo(containerView).inset(16)
         }
 
-        detailsLabel.snp.makeConstraints { make in
+        detailsButton.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(containerView).inset(16)
-        }
-        
-        buttonInfo.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(12.5)
-            make.leading.equalTo(containerView.snp.leading).offset(295)
-            
-            
+            make.leading.equalToSuperview().offset(100)
         }
     }
     
-    @objc private func detailsLabelTapped() {
-        print("Details label clicked")
-        UIView.animate(withDuration: 0.2,
-                              animations: {
-                                  self.detailsLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                              }, completion: { _ in
-                                  UIView.animate(withDuration: 0.2) {
-                                      self.detailsLabel.transform = CGAffineTransform.identity
-                                  }
-                              })
-        
-        DispatchQueue.main.async { [weak self] in
-              guard let self = self, let parentViewController = self.parentViewController else { return }
-              let passportViewController = PassportView()
-              passportViewController.modalPresentationStyle = .fullScreen
-              let transition = CATransition()
-              transition.duration = 0.3
-              transition.type = .push
-              transition.subtype = .fromRight
-              parentViewController.view.window?.layer.add(transition, forKey: kCATransition)
-              parentViewController.present(passportViewController, animated: false, completion: nil)
-          }
-      }
-  }
-
-extension UIView {
-    var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
-        while let responder = parentResponder {
-            parentResponder = responder.next
-            if let viewController = parentResponder as? UIViewController {
-                return viewController
-            }
-        }
-        return nil
+    @objc func navigateToPassportView() {
+        guard let parentViewController = self.parentViewController else { return }
+        let nextViewController = PassportView()
+        nextViewController.modalPresentationStyle = .fullScreen
+        parentViewController.present(nextViewController, animated: true, completion: nil)
     }
 }
 
+extension UIView {
+var parentViewController: UIViewController? {
+    var parentResponder: UIResponder? = self
+    while let responder = parentResponder {
+        parentResponder = responder.next
+        if let viewController = parentResponder as? UIViewController {
+            return viewController
+        }
+    }
+    return nil
+}
+}

@@ -1,11 +1,5 @@
-//
-//  ViewAnimationView.swift
-//  ios-profile-page
-//
-//  Created by Murodjon Turobov on 29/11/24.
-//
-
 import UIKit
+import SnapKit
 
 final class ViewAnimation: UIView {
     
@@ -39,7 +33,6 @@ final class ViewAnimation: UIView {
         animateFor(isHighlighted: false)
     }
     
-    
     fileprivate func animateFor(isHighlighted: Bool, completion: ((Bool) -> Void)? = nil) {
         let animationOptions: UIView.AnimationOptions = [.allowUserInteraction]
         if isHighlighted {
@@ -49,7 +42,6 @@ final class ViewAnimation: UIView {
                 usingSpringWithDamping: 1,
                 initialSpringVelocity: 0,
                 options: animationOptions, animations: { [weak self] in
-//                    self.transform = .init(scaleX: 1.5, y: 1.5)
                     self?.alpha = 0.5
             }, completion: completion)
         } else {
@@ -59,7 +51,6 @@ final class ViewAnimation: UIView {
                 usingSpringWithDamping: 1,
                 initialSpringVelocity: 0,
                 options: animationOptions, animations: { [weak self] in
-//                    self.transform = .identity
                     self?.alpha = 1.0
             }, completion: completion)
         }

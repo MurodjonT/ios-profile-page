@@ -8,6 +8,7 @@
 import UIKit
 
 class LeftIconTitleAndRightIconButton: ControlButton {
+    
     private let leftImageView = UIImageView()
     private let textLabel = BMLabel()
     private let rightImageView = UIImageView()
@@ -53,7 +54,6 @@ class LeftIconTitleAndRightIconButton: ControlButton {
         leftImageView.tintColor = .gray
         rightImageView.image = UIImage(systemName: "chevron.compact.right")
         rightImageView.tintColor = .gray
-
         
         textLabel.text = text
         textLabel.textColor = textColor
@@ -79,4 +79,5 @@ class LeftIconTitleAndRightIconButton: ControlButton {
             make.left.equalToSuperview()
             make.size.equalTo(size)
         }
-    }}
+    }
+}

@@ -3,13 +3,7 @@
 //  ios-profile-page
 //
 //  Created by Murodjon Turobov on 29/11/24.
-//
-//
-//  BMView.swift
-//  Daftar
-//
-//  Created by Samandar Jurayev on 14/05/24.
-//
+
 
 import UIKit
 

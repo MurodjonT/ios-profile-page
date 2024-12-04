@@ -5,6 +5,7 @@ class MiddleTableViewCell: UITableViewCell {
     static let identifier = "MiddleTableViewCell"
 
     private let tableView = UITableView()
+    private let containerView = ViewAnimation()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -17,17 +18,13 @@ class MiddleTableViewCell: UITableViewCell {
     }
 
     private func setupContainerView() {
-        let containerView: UIView = {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.layer.cornerRadius = 15
-            view.clipsToBounds = true
-            view.layer.shadowColor = UIColor.black.cgColor
-            view.layer.shadowOpacity = 0.1
-            view.layer.shadowOffset = CGSize(width: 0, height: 4)
-            view.layer.shadowRadius = 4
-            return view
-        }()
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 15
+        containerView.clipsToBounds = true
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.1
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        containerView.layer.shadowRadius = 4
 
         contentView.addSubview(containerView)
         containerView.addSubview(tableView)
@@ -49,6 +46,7 @@ class MiddleTableViewCell: UITableViewCell {
     }
 }
 
+
 extension MiddleTableViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -69,14 +67,14 @@ extension MiddleTableViewCell: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
            
-           UIView.animate(withDuration: 0.1,
-                          animations: {
-                              cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                          }, completion: { _ in
-                              UIView.animate(withDuration: 0.1) {
-                                  cell.transform = CGAffineTransform.identity
-                              }
-                          })
+//           UIView.animate(withDuration: 0.1,
+//                          animations: {
+//                              cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+//                          }, completion: { _ in
+//                              UIView.animate(withDuration: 0.1) {
+//                                  cell.transform = CGAffineTransform.identity
+//                              }
+//                          })
            
            tableView.deselectRow(at: indexPath, animated: true)
            
