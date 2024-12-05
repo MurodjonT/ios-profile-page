@@ -130,8 +130,8 @@ var parentViewController: UIViewController? {
         parentResponder = responder.next
         if let viewController = parentResponder as? UIViewController {
             return viewController
+            }
         }
-    }
     return nil
-}
+    }
 }
