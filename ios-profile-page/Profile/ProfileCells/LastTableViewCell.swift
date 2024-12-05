@@ -80,17 +80,7 @@ extension LastTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
-           
-           UIView.animate(withDuration: 0.1,
-                          animations: {
-                              cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                          }, completion: { _ in
-                              UIView.animate(withDuration: 0.1) {
-                                  cell.transform = CGAffineTransform.identity
-                              }
-                          })
-           
-           tableView.deselectRow(at: indexPath, animated: true)
+        ViewAnimationForRows.animate(cell: cell)
            
         switch indexPath.row {
         case 0:

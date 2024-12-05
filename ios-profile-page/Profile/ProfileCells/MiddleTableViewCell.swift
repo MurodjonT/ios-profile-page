@@ -5,7 +5,7 @@ class MiddleTableViewCell: UITableViewCell {
     static let identifier = "MiddleTableViewCell"
 
     private let tableView = UITableView()
-    private let containerView = ViewAnimation()
+    private let containerView = UIView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,20 +63,11 @@ extension MiddleTableViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
-           
-//           UIView.animate(withDuration: 0.1,
-//                          animations: {
-//                              cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-//                          }, completion: { _ in
-//                              UIView.animate(withDuration: 0.1) {
-//                                  cell.transform = CGAffineTransform.identity
-//                              }
-//                          })
-           
-           tableView.deselectRow(at: indexPath, animated: true)
+        ViewAnimationForRows.animate(cell: cell)
            
         switch indexPath.row {
         case 0:
