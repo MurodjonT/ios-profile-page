@@ -11,8 +11,6 @@ class MiddleInnerTableViewCell: UITableViewCell {
     
     private lazy var animationContainerView: ViewAnimation = {
         let view = ViewAnimation()
-        view.layer.cornerRadius = 24
-        
         return view
     }()
     

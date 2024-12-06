@@ -60,6 +60,8 @@ class LastInnerTableViewCell: UITableViewCell {
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
            contentView.addSubview(animationContainerView)
         animationContainerView.addSubview(iconImageView)
         animationContainerView.addSubview(label)

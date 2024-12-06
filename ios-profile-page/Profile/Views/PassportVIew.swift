@@ -1,19 +1,46 @@
-////
-////  Untitled.swift
-////  ios-profile-page
-////
-////  Created by Murodjon Turobov on 28/11/24.
-
-
 import UIKit
+import SnapKit
 
-
-class PassportView: UIViewController {
+class PassportView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    private let tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         setupBackButton()
+        setupTableView()
     }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
+            make.leading.trailing.bottom.equalTo(view)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "Passport Information"
+        cell.textLabel?.textAlignment = .center
+        return cell
+    }
+    
     private func setupBackButton() {
         let backButton = UIButton(type: .system)
         backButton.setTitle("Back", for: .normal)
