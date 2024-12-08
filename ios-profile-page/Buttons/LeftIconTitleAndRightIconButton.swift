@@ -1,14 +1,12 @@
 //
-//  Untitled.swift
+//  LeftIconTitleAndRightIconButton.swift
 //  ios-profile-page
 //
-//  Created by Murodjon Turobov on 29/11/24.
+//  Created by Murodjon Turobov on 07/12/24.
 //
-
 import UIKit
 
 class LeftIconTitleAndRightIconButton: ControlButton {
-    
     private let leftImageView = UIImageView()
     private let textLabel = BMLabel()
     private let rightImageView = UIImageView()
@@ -46,14 +44,11 @@ class LeftIconTitleAndRightIconButton: ControlButton {
     func setData(leftIcon: String,
                  text: String,
                  textColor: UIColor = .black,
-                 textFont: UIFont = .systemFont(ofSize: 16),
+                 textFont: UIFont = UIFont.systemFont(ofSize: 14),
                  textAlignment: NSTextAlignment = .left,
                  rightIcon: String) {
-        
-        leftImageView.image = UIImage(systemName: "storefront")
-        leftImageView.tintColor = .gray
-        rightImageView.image = UIImage(systemName: "chevron.compact.right")
-        rightImageView.tintColor = .gray
+        leftImageView.image = UIImage(named: leftIcon)
+        rightImageView.image = UIImage(named: rightIcon)
         
         textLabel.text = text
         textLabel.textColor = textColor
@@ -79,5 +74,4 @@ class LeftIconTitleAndRightIconButton: ControlButton {
             make.left.equalToSuperview()
             make.size.equalTo(size)
         }
-    }
-}
+    }}
