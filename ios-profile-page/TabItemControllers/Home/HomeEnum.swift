@@ -10,4 +10,5 @@ import Foundation
 
 enum HomeEnum: Int, CaseIterable {
     case typesServiceCollection
+//    case storiesAndServiecesCollection
 }
