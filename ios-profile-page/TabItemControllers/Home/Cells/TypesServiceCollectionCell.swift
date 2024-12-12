@@ -7,8 +7,8 @@ class TypesServiceCollectionCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true // Doira shaklini saqlash uchun zarur
-        imageView.backgroundColor = .lightGray // Placeholder rang
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
@@ -16,7 +16,7 @@ class TypesServiceCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         setupConstraints()
-        imageView.layer.cornerRadius = 40 // (80 / 2)
+        imageView.layer.cornerRadius = 40
         imageView.layer.masksToBounds = true
     }
     
@@ -30,8 +30,8 @@ class TypesServiceCollectionCell: UICollectionViewCell {
     
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
-            make.width.height.equalTo(80) // Doira uchun kenglik va balandlik
-            make.center.equalToSuperview() // O'rtaga joylashtirish
+            make.width.height.equalTo(80)
+            make.center.equalToSuperview()
         }
     }
 }

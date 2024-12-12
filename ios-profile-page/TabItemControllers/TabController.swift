@@ -16,7 +16,7 @@ class TabController: UITabBarController {
             let viewController: UIViewController
             switch tab {
             case .home:
-                viewController = HomeController()
+                viewController = ViewController()
                 viewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 1)
             case .locations:
                 viewController = LocationsController()

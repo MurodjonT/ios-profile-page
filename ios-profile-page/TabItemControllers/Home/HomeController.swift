@@ -1,84 +1,62 @@
-//
-//  HomeController.swift
-//  ios-profile-page
-//
-//  Created by Murodjon Turobov on 07/12/24.
-//
-
 import UIKit
+import SnapKit
 
 
-class HomeController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private let collectionView = HomeView()
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupNavigationBar()
-//        setupNavigationBarAppearance()
-        configureCollectionView()
-        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+     
+        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        view.addSubview(collectionView)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        }
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    private func configureCollectionView() {
-        collectionView.frame = view.bounds
-        view.addSubview(collectionView)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7 
     }
-}
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.layer.cornerRadius = 40
+        cell.clipsToBounds = true
         
-//    private func setupNavigationBar() {
-//        let profileButton = UIBarButtonItem(
-//            image: UIImage(systemName: "person.circle"),
-//            style: .plain,
-//            target: self,
-//            action: #selector(profileButtonTapped)
-//        )
-//        
-//        let notificationButton = UIButton(type: .system)
-//        notificationButton.setImage(UIImage(systemName: "bell"), for: .normal)
-//        notificationButton.addTarget(self, action: #selector(notificationButtonTapped), for: .touchUpInside)
-//        
-//        let searchButton = UIButton(type: .system)
-//        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-//        
-//        // UIStackView yaratish va tugmalarni joylashtirish
-//        let stackView = UIStackView(arrangedSubviews: [searchButton, notificationButton])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 5 // Tugmalar orasidagi bo‘shliq
-//        stackView.alignment = .center
-//        
-//        let stackBarButton = UIBarButtonItem(customView: stackView)
-//        
-//        // Tugmalarni navigation bar-ga joylashtirish
-//        navigationItem.leftBarButtonItem = profileButton
-//        navigationItem.rightBarButtonItem = stackBarButton
-//    }
-//    
-//    private func setupNavigationBarAppearance() {
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithOpaqueBackground() // Opaque qilib sozlash
-//        appearance.backgroundColor = UIColor.systemGray5
-//        navigationController?.navigationBar.standardAppearance = appearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//        navigationController?.navigationBar.compactAppearance = appearance
-//        navigationController?.navigationBar.tintColor = .blue
-//    }
-//
-//
-//
-//    @objc private func profileButtonTapped() {
-//        print("Profile icon tapped")
-//        // Bu yerda profile sahifaga o'tishni kodlashingiz mumkin
-//    }
-//
-//    @objc private func notificationButtonTapped() {
-//        print("Notification icon tapped")
-//        // Bu yerda notification sahifaga o'tishni kodlashingiz mumkin
-//    }
-//    
-//    @objc private func searchButtonTapped() {
-//        print("Search icon tapped")
-//        // Bu yerda notification sahifaga o'tishni kodlashingiz mumkin
-//    }
-//}
+        
+        let imageView = UIImageView(frame: cell.bounds)
+              imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
+              cell.addSubview(imageView)
+        
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth: CGFloat = 80
+        return CGSize(width: itemWidth, height: itemWidth) // O'lchamni 100x100 qilib belgilaymiz
+    }
+    
+    // Header uchun metod
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
+        header.backgroundColor = .gray // Headerning fon rangi
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+          return CGSize(width: collectionView.bounds.width, height: 400) // Headerning o'lchami
+      }
+}
+
