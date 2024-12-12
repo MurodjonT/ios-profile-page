@@ -10,9 +10,7 @@ class HeaderView: UICollectionReusableView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
-        
-        layout.minimumInteritemSpacing = 0// Elementlar orasida vertikal bo'shliq
+        layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 50, left: 10, bottom: 10, right: 10)
         
         innerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -21,16 +19,20 @@ class HeaderView: UICollectionReusableView {
         innerCollectionView.delegate = self
         innerCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "innerCell")
         
-        self.addSubview(innerCollectionView)
+        addSubview(innerCollectionView)
+
         
         innerCollectionView.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.height.equalTo(150)
-            make.left.right.equalToSuperview()        }
+            make.height.equalTo(200)
+            make.left.right.equalToSuperview()
+        }
+        
         layer.cornerRadius = 20
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         layer.masksToBounds = true
     }
+
     
     
     required init?(coder: NSCoder) {
@@ -42,27 +44,45 @@ class HeaderView: UICollectionReusableView {
 extension HeaderView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5 // Inner collectionda 5 dona element
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "innerCell", for: indexPath)
         
-
-        cell.layer.cornerRadius = 45
-        cell.clipsToBounds = true
-        cell.layer.borderWidth = 3
-        cell.layer.borderColor = UIColor.orange.cgColor
-        cell.backgroundColor = .green
+        // UIImageView
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "soon-\(indexPath.item + 1)")
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 45
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.orange.cgColor
+        cell.addSubview(imageView)
         
+        imageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(90) // Kvadrat o'lcham, cornerRadius bilan dumaloq bo'ladi
+        }
         
-        let imageView = UIImageView(frame: cell.bounds)
-              imageView.contentMode = .scaleAspectFill
-              imageView.image = UIImage(named: "soon-\(indexPath.item + 1)")
-              cell.addSubview(imageView)
+        // UILabel
+        let titleLabel = UILabel()
+        titleLabel.text = "Title \(indexPath.item + 1)"
+        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        cell.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview().inset(5)
+        }
         
         return cell
     }
+
     
     // O'lchamni belgilash
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
