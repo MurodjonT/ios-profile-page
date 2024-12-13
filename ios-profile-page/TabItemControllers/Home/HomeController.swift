@@ -5,6 +5,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var collectionView: UICollectionView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -20,6 +21,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        
+        collectionView.contentInset.bottom = tabBarController?.tabBar.frame.height ?? 0
+
     }
     
     private func configureNavigationBar() {
@@ -65,7 +69,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,6 +81,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
         cell.addSubview(imageView)
+
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Title \(indexPath.item + 1)"
+        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        cell.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview().inset(5)
+        }
         
         return cell
     }
@@ -93,6 +111,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 400)
+        return CGSize(width: collectionView.bounds.width, height: 300)
     }
 }

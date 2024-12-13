@@ -4,28 +4,35 @@ import SnapKit
 class HeaderView: UICollectionReusableView {
     
     var innerCollectionView: UICollectionView!
+    let quickServicesView = QuickServicesView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 50, left: 10, bottom: 10, right: 10)
         
         innerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         innerCollectionView.backgroundColor = .gray
         innerCollectionView.dataSource = self
         innerCollectionView.delegate = self
         innerCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "innerCell")
-        
+        quickServicesView.backgroundColor = .gray
         addSubview(innerCollectionView)
-
+        addSubview(quickServicesView)
+        
         
         innerCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(10)
-            make.height.equalTo(200)
+            make.top.equalToSuperview()
+            make.height.equalTo(130)
             make.left.right.equalToSuperview()
+        
+        }
+        
+        quickServicesView.snp.makeConstraints { make in
+            make.top.equalTo(innerCollectionView.snp.bottom).offset(-10)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(150)
         }
         
         layer.cornerRadius = 20
@@ -33,13 +40,10 @@ class HeaderView: UICollectionReusableView {
         layer.masksToBounds = true
     }
 
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension HeaderView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
@@ -61,8 +65,7 @@ extension HeaderView: UICollectionViewDataSource, UICollectionViewDelegateFlowLa
         cell.addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(-10)
             make.width.height.equalTo(90) // Kvadrat o'lcham, cornerRadius bilan dumaloq bo'ladi
         }
         
@@ -82,7 +85,6 @@ extension HeaderView: UICollectionViewDataSource, UICollectionViewDelegateFlowLa
         
         return cell
     }
-
     
     // O'lchamni belgilash
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

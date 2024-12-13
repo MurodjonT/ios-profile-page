@@ -7,55 +7,44 @@
 import UIKit
 import SnapKit
 
-class ProfileNavbarCell: UIView {
+class ProfileNavbarCell: UIViewController {
     
-    let profileImageView = UIImageView()
-    let searchButton = UIImageView()
-    let notificationButton = UIImageView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    func configureNavigationBar() {
+        // Chap taraf: foydalanuvchi rasmi
+        let profileImage = UIImage(systemName: "person.crop.circle")
+        let profileButton = UIBarButtonItem(image: profileImage,
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(profileTapped))
+        navigationItem.leftBarButtonItem = profileButton
         
-        // Profile icon
-        profileImageView.image = UIImage(systemName: "person.circle")
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = 20
-        profileImageView.clipsToBounds = true
-        self.addSubview(profileImageView)
+        // O'ng taraf: xabar tugmasi
+        let notificationImage = UIImage(systemName: "bell")
+        let notificationButton = UIBarButtonItem(image: notificationImage,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(notificationTapped))
         
-        searchButton.image = UIImage(systemName: "person.circle")
-        searchButton.contentMode = .scaleAspectFill
-        searchButton.layer.cornerRadius = 20
-        searchButton.clipsToBounds = true
-        self.addSubview(searchButton)
         
-        notificationButton.image = UIImage(systemName: "person.circle")
-        notificationButton.contentMode = .scaleAspectFill
-        notificationButton.layer.cornerRadius = 20
-        notificationButton.clipsToBounds = true
-        self.addSubview(notificationButton)
+        let searchImage = UIImage(systemName: "magnifyingglass")
+        let searchButton = UIBarButtonItem(image: searchImage,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(searchTapped))
         
-        profileImageView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(40)
-        }
-        
-        searchButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-50)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(40)
-        }
-        
-        notificationButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(40)
-        }
+        navigationItem.rightBarButtonItems = [notificationButton, searchButton]
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc private func profileTapped() {
+        print("Profile button tapped")
+    }
+    
+    @objc private func notificationTapped() {
+        print("Notification button tapped")
+    }
+    
+    @objc private func searchTapped() {
+        print("Notification button tapped")
     }
 }
-
