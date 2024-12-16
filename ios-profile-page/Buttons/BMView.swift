@@ -27,14 +27,14 @@ extension ViewProtocol where Self: UIView {
 }
 
 class BMView: UIView, ViewProtocol {
-    public init() {
-        super.init(frame: .zero)
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setup()
     }
     
     required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
     
     public func setupSubviews() {}
@@ -47,5 +47,3 @@ class BMView: UIView, ViewProtocol {
     
     public func localize() {}
 }
-
-

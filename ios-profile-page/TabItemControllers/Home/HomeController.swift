@@ -74,19 +74,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.layer.cornerRadius = 40
-        cell.clipsToBounds = true
+
         
         let imageView = UIImageView(frame: cell.bounds)
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
         cell.addSubview(imageView)
-
+        
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(10)
+            make.width.height.equalTo(70)
+        }
         
         let titleLabel = UILabel()
         titleLabel.text = "Title \(indexPath.item + 1)"
         titleLabel.font = UIFont.systemFont(ofSize: 12)
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         cell.addSubview(titleLabel)
         
