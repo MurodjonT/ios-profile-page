@@ -20,6 +20,7 @@ extension ViewProtocol where Self: UIView {
     public func setup() {
         setupSubviews()
         setupConstraints()
+        
         setupTargets()
         style()
         localize()

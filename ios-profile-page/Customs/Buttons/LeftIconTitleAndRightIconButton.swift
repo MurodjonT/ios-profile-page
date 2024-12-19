@@ -8,7 +8,7 @@ import UIKit
 
 class LeftIconTitleAndRightIconButton: ControlButton {
     private let leftImageView = UIImageView()
-    private let textLabel = BMLabel()
+    private let textLabel = MLabel()
     private let rightImageView = UIImageView()
     
     override func setupSubviews() {

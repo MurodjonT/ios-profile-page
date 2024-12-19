@@ -6,10 +6,11 @@
 
 import UIKit
 
-open class BMLabel: UILabel, ViewProtocol {
+open class MLabel: UILabel, ViewProtocol {
+    
     open var insets: UIEdgeInsets = .zero
     
-    public init(_ text: String? = "NMLabel",
+    public init(_ text: String? = "MLabel",
                 font: UIFont? = nil,
                 textColor: UIColor = .darkText,
                 textAlignment: NSTextAlignment = .left,
@@ -30,6 +31,7 @@ open class BMLabel: UILabel, ViewProtocol {
         }
         
         setup()
+        
     }
     
     required public init?(coder: NSCoder) {
