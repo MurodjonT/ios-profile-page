@@ -68,6 +68,16 @@ class ViewController2: UIViewController {
         return button
     }()
     
+    private var button6: BottomIconAndTitleButton = {
+        let button = BottomIconAndTitleButton()
+        button.setIconNameAndTitle(iconNmae: "highlighter", title: "Bottom Button")
+        button.layer.cornerRadius = 20
+        button.layer.masksToBounds = true
+        button.backgroundColor = .white
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,6 +88,7 @@ class ViewController2: UIViewController {
         view.addSubview(button3)
         view.addSubview(button4)
         view.addSubview(button5)
+        view.addSubview(button6)
         
         setupTargets()
         setUpConstraints()
@@ -113,6 +124,13 @@ class ViewController2: UIViewController {
         
         button5.snp.makeConstraints { make in
             make.top.equalTo(button4.snp.bottom).offset(10)
+            make.left.equalToSuperview().inset(20)
+            make.right.equalToSuperview().inset(335)
+            make.height.equalTo(100)
+        }
+        
+        button6.snp.makeConstraints { make in
+            make.top.equalTo(button5.snp.bottom).offset(10)
             make.left.equalToSuperview().inset(20)
             make.right.equalToSuperview().inset(335)
             make.height.equalTo(100)
