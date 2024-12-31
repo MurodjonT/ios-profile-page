@@ -20,11 +20,17 @@ class ToDoCell: UITableViewCell {
         return label
     }()
     
+//    private let checkMark: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(systemName: "checkmark")
+//        return imageView
+//    }()
+//    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemGray6
-        contentView.addSubview(titleLabel)
-        setupConstraints()
+//        contentView.addSubview(titleLabel)
+//        contentView.addSubview(checkMark)
+//        setupConstraints()
         
     }
     
@@ -33,11 +39,17 @@ class ToDoCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(16)
-            make.centerX.equalTo(contentView)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
-        }
+//        titleLabel.snp.makeConstraints { make in
+//            make.top.equalTo(contentView.snp.top).offset(16)
+//            make.centerX.equalTo(contentView)
+//            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+//        }
+//        
+//        checkMark.snp.makeConstraints { make in
+//            make.top.equalTo(contentView.snp.top).offset(16)
+//            make.leading.equalTo(titleLabel.snp.trailing).offset(50)
+//            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+//        }
     }
 
 }
