@@ -5,8 +5,6 @@
 //  Created by Murodjon Turobov on 26/11/24.
 //
 import UIKit
-import SnapKit
-
 class ProfileViewController: UIViewController {
     
 

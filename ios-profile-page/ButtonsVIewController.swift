@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController2: UIViewController {
+class ButtonsViewController: UIViewController {
     
     private var button1: TitleAndRightIconButton2 = {
         let button = TitleAndRightIconButton2()
