@@ -10,8 +10,9 @@ import UIKit
 class ToDoListViewController: UIViewController {
     
     private let ToDoListView = ToDoView()
-    //    let defaults = UserDefaults.standard
     let UserDefaultsKey = "ToDoListView"
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     
@@ -20,21 +21,7 @@ class ToDoListViewController: UIViewController {
         configureTableView()
         configureNavigationBar()
         
-        
-//        
-//        let newItem = Item()
-//        newItem.title = "Item 1"
-//        ToDoListView.itemArray.append(newItem)
-//        
-//        let newItem1 = Item()
-//        newItem1.title = "Item 2"
-//        ToDoListView.itemArray.append(newItem1)
-//        
-//        let newItem2 = Item()
-//        newItem2.title = "Item 3"
-//        ToDoListView.itemArray.append(newItem2)
-        
-        loadItems()
+//        loadItems()
     }
     
     func configureTableView() {
@@ -68,8 +55,9 @@ class ToDoListViewController: UIViewController {
         
         let alertAction = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
+            newItem.done = false
             
             self.ToDoListView.itemArray.append(newItem)
             
@@ -89,26 +77,24 @@ class ToDoListViewController: UIViewController {
     }
     
     func saveItem() {
-        let encoder = PropertyListEncoder()
         
         do {
-            let data = try encoder.encode(ToDoListView.itemArray)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("Error encoding  item array, \(error)")
+            print("Error saving context, \(error)")
         }
         self.ToDoListView.reloadData()
         
     }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                ToDoListView.itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Error decoding item array, \(error)")
-            }
-        }
-    }
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                ToDoListView.itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error decoding item array, \(error)")
+//            }
+//        }
+//    }
 }
