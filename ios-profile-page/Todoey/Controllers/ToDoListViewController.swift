@@ -6,22 +6,20 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UIViewController {
     
     private let ToDoListView = ToDoView()
     let UserDefaultsKey = "ToDoListView"
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         configureNavigationBar()
-        
-//        loadItems()
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        loadItems()
     }
     
     func configureTableView() {
@@ -87,14 +85,12 @@ class ToDoListViewController: UIViewController {
         
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                ToDoListView.itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("Error decoding item array, \(error)")
-//            }
-//        }
-//    }
+    func loadItems() {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            ToDoListView.itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data, \(error)")
+        }
+    }
 }
