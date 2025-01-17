@@ -11,6 +11,8 @@ import CoreData
 class ToDoView: UITableView, UITableViewDataSource, UITableViewDelegate {
         
     var itemArray = [Item]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -47,18 +49,35 @@ class ToDoView: UITableView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(itemArray[indexPath.row])
         
-        itemArray[indexPath.row].done.toggle()
+        
+        context.delete(itemArray[indexPath.row])
+        itemArray.remove(at: indexPath.row)
+        saveItem()
+     
+        
         (self.delegate as? ToDoListViewController)?.saveItem()
+
+//        itemArray[indexPath.row].done.toggle()
 
 //        if itemArray[indexPath.row].done == false {
 //            itemArray[indexPath.row].done = true
 //        } else {
 //            itemArray[indexPath.row].done = false
 //        }
-        
+
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func saveItem() {
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context, \(error)")
+        }
+        self.reloadData()
+        
     }
     
 }
