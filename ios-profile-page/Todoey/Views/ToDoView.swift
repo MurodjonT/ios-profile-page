@@ -54,7 +54,6 @@ class ToDoView: UITableView, UITableViewDataSource, UITableViewDelegate {
         itemArray.remove(at: indexPath.row)
         saveItem()
      
-        
         (self.delegate as? ToDoListViewController)?.saveItem()
 
 //        itemArray[indexPath.row].done.toggle()
